@@ -1,6 +1,7 @@
 plugins {
   id 'java'
   id 'application'
+  id 'eclipse'
   id 'com.gradleup.shadow' version '8.3.5'
   id 'to.wetransform.semantic-release-version' version '2.1.2'
 }
@@ -23,6 +24,10 @@ dependencies {
   implementation "io.vertx:vertx-core:$vertxVersion"
   implementation "io.vertx:vertx-web:$vertxVersion"
   implementation 'commons-io:commons-io:2.18.0'
+
+  testImplementation "io.vertx:vertx-unit:$vertxVersion"
+  testImplementation "io.vertx:vertx-web-client:$vertxVersion"
+  testImplementation 'junit:junit:4.13.2'
 }
 
 mainClassName = 'io.vertx.example.BookService'
