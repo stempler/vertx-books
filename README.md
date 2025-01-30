@@ -1,12 +1,9 @@
-Vert.x 3 simple Gradle project example
+Vert.x 4 simple Gradle project example
 ======================================
 
 This project shows a very simple example project using Gradle, which has an HTTP server with a very simple API and backend.
 
-In this example Vert.x is used embedded. I.e. we use the Vert.x APIs directly in our own classes rather than deploying
-the code in verticles.
-
-To run the service, **Java 8** needs to be available on your machine.
+To run the service, **Java 17** needs to be available on your machine.
 
 Use the project in your IDE
 ---------------------------
@@ -27,18 +24,10 @@ When running the application is available at <http://localhost:8080> with a simp
 
 The `scripts/` folder contains some example API calls w/ `curl`.
 
-Build and run using Gradle
---------------------------
+Run using Gradle
+----------------
 
-The build.gradle uses the Gradle shadowJar plugin to assemble the application and all it's dependencies into a single "fat" jar.
-
-To build the "fat jar"
-
-```
-./gradlew shadowJar
-```
-
-Because the application plugin is being used, you may directly run the application:
+Because the application plugin is being used, you can directly run the application:
 
 ```
 ./gradlew run
