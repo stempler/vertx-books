@@ -1,15 +1,13 @@
 package io.vertx.example;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import io.vertx.core.*;
 import org.apache.commons.io.IOUtils;
 
-import io.vertx.core.AsyncResult;
-import io.vertx.core.Future;
-import io.vertx.core.Handler;
-import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
@@ -25,14 +23,14 @@ public class BooksDB {
     super();
 
     this.vertx = vertx;
-    books = new JsonArray(IOUtils.toString(getClass().getResourceAsStream("books.json"), "UTF-8"));
+    books = new JsonArray(IOUtils.toString(getClass().getResourceAsStream("books.json"), StandardCharsets.UTF_8));
   }
 
-  protected <T> void runTask(Handler<Future<T>> action, Handler<AsyncResult<T>> handler) {
-    Future<T> future = Future.future();
-    future.setHandler(handler);
+  protected <T> void runTask(Handler<Promise<T>> action, Handler<AsyncResult<T>> handler) {
+    Promise<T> promise = Promise.promise();
+    promise.future().onComplete(handler);
     vertx.runOnContext(x -> {
-      action.handle(future);
+      action.handle(promise);
     });
   }
 

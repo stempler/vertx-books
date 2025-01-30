@@ -35,7 +35,7 @@ public class BookService {
     router.get("/books/featured").handler(this::getFeaturedBook);
 
     vertx.createHttpServer()
-    .requestHandler(router::accept)
+    .requestHandler(router)
     .listen(8080, handler -> {
       if (handler.succeeded()) {
         System.out.println("http://localhost:8080/");
@@ -59,7 +59,7 @@ public class BookService {
   }
 
   private void createBook(RoutingContext rc) {
-    JsonObject book = rc.getBodyAsJson();
+    JsonObject book = rc.body().asJsonObject();
     validateBook(book);
     books.addBook(book, res -> {
       sendJsonResponse(rc, 200, book);
